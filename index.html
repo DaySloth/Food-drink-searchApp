@@ -6,10 +6,63 @@
     <title>Document</title>
 </head>
 <body>
+    <form>
+        <label>Search for Recipe:</label>
+        <input type="text" id="recipeSearch" />
+        <button id="submitBtn" type="submit">Search</button>
+    </form>
+
+    <div id="recipeDiv"></div>
+
+
+
+
+
+
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.min.js"></script>
     <script src="./assets/js/script.js"></script>
     <script>
+        let recipeSearch;
+
+    function searchForRecipe(){
+        console.log(recipeSearch)
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query="+ recipeSearch,
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+                "x-rapidapi-key": "9493df4a93msh1173120d859372ap12bb8ajsnff91615f339b"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            $("#recipeDiv").empty();
+            for(var i = 0; i < 5; i++){
+                let recipeCard = $('<div>').attr("class", "recipe-card");
+                let title = $('<h4>').text(response.results[i].title);
+                let readyMin = $('<p>').text("Ready In: " + response.results[i].readyInMinutes + " min");
+                let servings = $('<p>').text("Servings: " + response.results[i].servings);
+                recipeCard.append(title);
+                recipeCard.append(readyMin);
+                recipeCard.append(servings);
+                recipeCard.append($("<hr>"));
+                $("#recipeDiv").append(recipeCard);
+            };
+        });
+    };
+
+    $("#submitBtn").on("click", function(event){
+        event.preventDefault();
+        recipeSearch = $("#recipeSearch").val();
+        searchForRecipe();
+    });
 
 
 
@@ -19,7 +72,6 @@
 
 
 
-        
     </script>
 </body>
 </html>
