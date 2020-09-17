@@ -76,7 +76,7 @@ function searchForRecipe() {
                 recipeCardBody.append(servings);
                 recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
                 recipeCardBody.append($('<br/>'))
-                recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").text("Add to Recipe Book"));
+                recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Add to Recipe Book"));
                 summaryDiv.append(recipeCardBody);
                 recipeCard.append(summaryDiv);
                 recipeCardHoriz.append(recipeCard);
@@ -116,13 +116,22 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
             };
         };
         if(condition){
-            console.log("already in storage not adding")
+            console.log("already in storage not adding");
+            $('.modal-content').attr("style", "background-color: #FFA2A2; color: #B81919");
+            $('#modalTitle').text("Error");
+            $('#modalBody').html("Already added to your "+ "<a href=./recipes.html>Recipe Book</a>");
         } else {
-            console.log("adding")
+            console.log("adding");
+            $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
+            $('#modalTitle').text("Success");
+            $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
             savedRecipes.push(recipeObj);
         };
     }else{
         savedRecipes = [];
+        $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
+            $('#modalTitle').text("Success");
+            $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
         savedRecipes.push(recipeObj);
     };
     localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
