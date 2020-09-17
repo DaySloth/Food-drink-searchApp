@@ -49,7 +49,8 @@ function searchForRecipe() {
             recipeCardBody.append(readyMin);
             recipeCardBody.append(servings);
             recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).text("Show Ingredients"));
-            recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook"));
+            recipeCardBody.append($('<br/>'))
+            recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").text("Add to Recipe Book"));
             recipeCard.append(recipeCardBody);
             $("#recipeCardDiv").append(recipeCard);
         };
@@ -62,7 +63,7 @@ $("#submitBtn").on("click", function (event) {
     searchForRecipe();
 });
 
-$("#recipeDiv").on("click", ".ingredientsBtn", function (event) {
+$("#recipeCardDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
 });
