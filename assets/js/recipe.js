@@ -7,7 +7,7 @@ function init(){
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imgDiv = $('<div>').attr("class", "col-md-4");
-                let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc);
+                let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc).attr("style", "width: 18em");
                 let summaryDiv = $('<div>').attr("class", "col-md-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
                 let title = $('<h5>').attr("class", "card-title").text(savedFoodRecipes[i].title);
@@ -19,7 +19,7 @@ function init(){
                 recipeCardBody.append(title);
                 recipeCardBody.append(readyMin);
                 recipeCardBody.append(servings);
-                recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", savedFoodRecipes[i].recipeId).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
+                recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", savedFoodRecipes[i].recipeId).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients/Instructions"));
                 recipeCardBody.append($('<br/>'))
                 recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
                 summaryDiv.append(recipeCardBody);
@@ -28,11 +28,11 @@ function init(){
                 $("#foodRecipeDiv").append(recipeCardHoriz);
             };
         }else{
-            alert("no recipes")
+            $("#foodRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
         };
         
     }else{
-        alert("no recipes")
+        $("#foodRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
     };
 };
 
