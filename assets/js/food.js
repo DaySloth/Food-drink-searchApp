@@ -76,7 +76,7 @@ function searchForRecipe() {
                 recipeCardBody.append(servings);
                 recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
                 recipeCardBody.append($('<br/>'))
-                recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
+                recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").text("Add to Recipe Book"));
                 summaryDiv.append(recipeCardBody);
                 recipeCard.append(summaryDiv);
                 recipeCardHoriz.append(recipeCard);
@@ -86,18 +86,18 @@ function searchForRecipe() {
     });
 };
 
-$("#submitBtn").on("click", function (event) {
+$("#submitBtn").on("click", function(event) {
     event.preventDefault();
     recipeSearch = $("#recipeSearch").val();
     searchForRecipe();
 });
 
-$("#recipeCardDiv").on("click", ".ingredientsBtn", function (event) {
+$("#recipeCardDiv").on("click", ".ingredientsBtn", function(event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
 });
 
-$("#recipeCardDiv").on("click", "#addToRecipeBook", function (event) {
+$("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
     event.preventDefault();
     let recipeObj;
     recipeObj = {
@@ -105,7 +105,7 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function (event) {
         readyMin: $(this).parent().children()[1].innerHTML,
         servings: $(this).parent().children()[2].innerHTML,
         recipeId: $(this).parent().children()[3].dataset.recipeid,
-        imgSrc: $(this).parent().parent().children()[0].currentSrc,
+        imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
     };
     let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedRecipes){

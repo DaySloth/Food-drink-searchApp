@@ -1,31 +1,36 @@
-let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-
 function init(){
+    $("#foodRecipeDiv").empty();
+    let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedFoodRecipes){
-        for (var i = 0; i < savedFoodRecipes.length; i++) {
-            let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
-            let recipeCard = $('<div>').attr("class", "row no-gutters");
-            let imgDiv = $('<div>').attr("class", "col-md-4");
-            let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc);
-            let summaryDiv = $('<div>').attr("class", "col-md-8");
-            let recipeCardBody = $('<div>').attr("class", "card-body");
-            let title = $('<h5>').attr("class", "card-title").text(savedFoodRecipes[i].title);
-            let readyMin = $('<p>').attr("class", "card-text").text("Ready In: " + savedFoodRecipes[i].readyMin + " min");
-            let servings = $('<p>').attr("class", "card-text").text("Servings: " + savedFoodRecipes[i].servings);
-            
-            imgDiv.append(foodImg);
-            recipeCard.append(imgDiv);
-            recipeCardBody.append(title);
-            recipeCardBody.append(readyMin);
-            recipeCardBody.append(servings);
-            recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", savedFoodRecipes[i].recipeId).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
-            recipeCardBody.append($('<br/>'))
-            recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
-            summaryDiv.append(recipeCardBody);
-            recipeCard.append(summaryDiv);
-            recipeCardHoriz.append(recipeCard);
-            $("#foodRecipeDiv").append(recipeCardHoriz);
+        if(savedFoodRecipes[0] !== undefined){
+            for (var i = 0; i < savedFoodRecipes.length; i++) {
+                let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
+                let recipeCard = $('<div>').attr("class", "row no-gutters");
+                let imgDiv = $('<div>').attr("class", "col-md-4");
+                let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc);
+                let summaryDiv = $('<div>').attr("class", "col-md-8");
+                let recipeCardBody = $('<div>').attr("class", "card-body");
+                let title = $('<h5>').attr("class", "card-title").text(savedFoodRecipes[i].title);
+                let readyMin = $('<p>').attr("class", "card-text").text(savedFoodRecipes[i].readyMin);
+                let servings = $('<p>').attr("class", "card-text").text(savedFoodRecipes[i].servings);
+                
+                imgDiv.append(foodImg);
+                recipeCard.append(imgDiv);
+                recipeCardBody.append(title);
+                recipeCardBody.append(readyMin);
+                recipeCardBody.append(servings);
+                recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", savedFoodRecipes[i].recipeId).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
+                recipeCardBody.append($('<br/>'))
+                recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
+                summaryDiv.append(recipeCardBody);
+                recipeCard.append(summaryDiv);
+                recipeCardHoriz.append(recipeCard);
+                $("#foodRecipeDiv").append(recipeCardHoriz);
+            };
+        }else{
+            alert("no recipes")
         };
+        
     }else{
         alert("no recipes")
     };
@@ -70,4 +75,18 @@ init();
 $("#foodRecipeDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
+});
+
+$("#foodRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
+    event.preventDefault();
+    let compareID = $(this).parent().children()[3].dataset.recipeid;
+    let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    console.log(savedFoodRecipes);
+    for(var i = 0; i < savedFoodRecipes.length; i++){
+        if(savedFoodRecipes[i].recipeId == compareID){
+            savedFoodRecipes.splice(i, 1);
+        }
+    };
+    localStorage.setItem("savedRecipes", JSON.stringify(savedFoodRecipes));
+    init();
 });
