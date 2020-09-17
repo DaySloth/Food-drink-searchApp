@@ -1,23 +1,4 @@
-const left = document.querySelector('.left');
-const right = document.querySelector('.right');
-const container = document.querySelector('.container');
-
-left.addEventListener('mouseenter', () => {
-    container.classList.add('hover-left');
-});
-
-left.addEventListener('mouseleave', () => {
-    container.classList.remove('hover-left');
-});
-
-right.addEventListener('mouseenter', () => {
-    container.classList.add('hover-right');
-});
-
-right.addEventListener('mouseleave', () => {
-    container.classList.remove('hover-right');
-});
-
+let recipeSearch; 
 
 
 function searchIngredients(recipeid) {
@@ -34,6 +15,14 @@ function searchIngredients(recipeid) {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        let modalTitle = response.title;
+        let ingredientsListUl = $('<ul>');
+        
+        for(var i = 0; i < response.extendedIngredients.length; i++){
+            ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
+        };
+        $('#modalTitle').text(modalTitle);
+        $('#modalBody').html(ingredientsListUl);
     });
 };
 
