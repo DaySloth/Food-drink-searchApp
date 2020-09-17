@@ -93,26 +93,30 @@ $("#recipeCardDiv").on("click", ".ingredientsBtn", function (event) {
 
 $("#recipeCardDiv").on("click", "#addToRecipeBook", function (event) {
     event.preventDefault();
-    let recipeObj = {
+    let recipeObj;
+    recipeObj = {
         title: $(this).parent().children()[0].innerHTML,
         readyMin: $(this).parent().children()[1].innerHTML,
         servings: $(this).parent().children()[2].innerHTML,
         recipeId: $(this).parent().children()[3].dataset.recipeid,
     };
-    let savedRecipes = localStorage.getItem("savedRecipes")
+    let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedRecipes){
-        if(savedRecipes.includes(recipeObj)){
-            console.log("recipe already in storage")
+        let condition = false;
+        for(var i = 0; i < savedRecipes.length; i++){
+            if(savedRecipes[i].title == recipeObj.title){
+                condition = true;
+            };
+        };
+        if(condition){
+            console.log("already in storage not adding")
         } else {
+            console.log("adding")
             savedRecipes.push(recipeObj);
-            console.log("stored data: "+ savedRecipes);
-        }
-        
+        };
     }else{
         savedRecipes = [];
         savedRecipes.push(recipeObj);
-        console.log("new data:");
-        console.log(savedRecipes);
     };
-    localStorage.setItem("savedRecipes");
+    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
 });
