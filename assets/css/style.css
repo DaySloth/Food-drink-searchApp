@@ -45,3 +45,11 @@
 .recipe-div{
   width: 47%;
 }
+
+.modal-body ul, .modal-body ol {
+  padding-left: 20px;
+}
+
+.modal-body h6{
+  font-weight: bold;
+}

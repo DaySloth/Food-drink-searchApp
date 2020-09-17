@@ -99,6 +99,7 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function (event) {
         readyMin: $(this).parent().children()[1].innerHTML,
         servings: $(this).parent().children()[2].innerHTML,
         recipeId: $(this).parent().children()[3].dataset.recipeid,
+        imgSrc: $(this).parent().parent().children()[0].currentSrc,
     };
     let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedRecipes){
