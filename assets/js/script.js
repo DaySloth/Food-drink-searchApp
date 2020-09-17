@@ -36,14 +36,16 @@ function searchForRecipe() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
-        $("#recipeDiv").empty();
+        $("#recipeCardDiv").empty();
         for (var i = 0; i < 5; i++) {
-            let recipeCard = $('<div>').attr("class", "card");
-            let foodImg = $('<img>').attr("class", "card-img-top");
+            let recipeCard = $('<div>').attr("class", "card").attr("style", "width: 18rem");
+            let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
+            let foodImg = $('<img>').attr("class", "card-img-top").attr("src", imageURL).attr("style", "width: inherited");
             let recipeCardBody = $('<div>').attr("class", "card-body");
             let title = $('<h5>').attr("class", "card-title").text(response.results[i].title);
             let readyMin = $('<p>').attr("class", "card-text").text("Ready In: " + response.results[i].readyInMinutes + " min");
             let servings = $('<p>').attr("class", "card-text").text("Servings: " + response.results[i].servings);
+            
             recipeCard.append(foodImg);
             recipeCardBody.append(title);
             recipeCardBody.append(readyMin);
