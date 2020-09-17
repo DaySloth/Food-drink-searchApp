@@ -90,3 +90,29 @@ $("#recipeCardDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
 });
+
+$("#recipeCardDiv").on("click", "#addToRecipeBook", function (event) {
+    event.preventDefault();
+    let recipeObj = {
+        title: $(this).parent().children()[0].innerHTML,
+        readyMin: $(this).parent().children()[1].innerHTML,
+        servings: $(this).parent().children()[2].innerHTML,
+        recipeId: $(this).parent().children()[3].dataset.recipeid,
+    };
+    let savedRecipes = localStorage.getItem("savedRecipes")
+    if(savedRecipes){
+        if(savedRecipes.includes(recipeObj)){
+            console.log("recipe already in storage")
+        } else {
+            savedRecipes.push(recipeObj);
+            console.log("stored data: "+ savedRecipes);
+        }
+        
+    }else{
+        savedRecipes = [];
+        savedRecipes.push(recipeObj);
+        console.log("new data:");
+        console.log(savedRecipes);
+    };
+    localStorage.setItem("savedRecipes");
+});

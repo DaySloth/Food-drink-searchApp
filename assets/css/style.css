@@ -34,3 +34,14 @@
   width: 150px;
   border-radius: 50%;
 }
+
+
+
+
+/* Recipe Book Styling */
+.split-container{
+  width: 100%;
+}
+.recipe-div{
+  width: 47%;
+}
