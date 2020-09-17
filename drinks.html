@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <title>Document</title>
     <h1>Drinks</h1>
-</head>
-<body>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="whatDrink" />
+      <button id="submitBtn">drink up!</button>
+      <button id="byName">Search by Name</button>
+      <button id="byIngredient"> Search by Ingredient </button>
+    </div>
+  </body>
+  <script>
+    searchType=""
+    console.log(searchType)
+    function DrinkSearch() {
+    //value assigned to search type by checkbox
+       
+      
+      if (searchType===Name){
+       var drinksAPI =
+        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+      }
+      if (searchType===Ingredient){
+         drinksAPI =
+        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+      }
     
-</body>
+
+      $.ajax({
+        url: drinksAPI,
+        method: "GET",
+      }).then(function (response) {
+        console.log(response);
+     })
+    }
+
+    $("#submitBtn").on("click", function (event) {
+        event.preventDefault();
+        drinkName = $("#whatDrink").val();
+        DrinkSearch();
+    })
+
+    $("byName").on("click",function(event){
+        event.preventDefault();
+        searchType="Name"
+        console.log(searchType)
+        return
+    })
+    $("byIngredient").on("click",function(event){
+        event.preventDefault();
+        searchType="Ingredient"
+        console.log(searchType)
+        return
+    })
+
+  </script>
 </html>
