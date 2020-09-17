@@ -1,4 +1,4 @@
-
+let recipeSearch;
 function searchIngredients(recipeid) {
     var settings = {
         "async": true,

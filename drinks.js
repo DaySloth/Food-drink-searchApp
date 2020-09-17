@@ -1,7 +1,12 @@
 searchType = ""
-console.log(searchType)
+resultsDispay= $("#results")
+//function that gets ingredient details button
+function getIngredients(){
+    let instructions= 
+
+}
+
 function DrinkSearch() {
-    //value assigned to search type by checkbox
 
 
     if (searchType === "Name") {
@@ -19,6 +24,19 @@ function DrinkSearch() {
         method: "GET",
     }).then(function (response) {
         console.log(response);
+        for (var i=0; i< response.drinks.length;i++){
+        let picture=$("<img>");
+        let drinkPic=response.drinks[i].strDrinkThumb;
+        picture.attr("src",drinkPic);
+        let drinkName=response.drinks[i].strDrink;
+        let explore=$("<button>Details</button>");
+        let drinkID=response.drinks[i].idDrink
+        let newDiv=$("<div>");
+        newDiv.append(picture);
+        newDiv.append(drinkName);
+        newDiv.append(explore);
+        resultsDispay.append(newDiv);
+        }
     })
 }
 
@@ -32,11 +50,11 @@ $("#byName").on("click", function (event) {
     event.preventDefault();
     searchType = "Name"
     console.log(searchType)
-    return
+    return searchType
 })
 $("#byIngredient").on("click", function (event) {
     event.preventDefault();
     searchType = "Ingredient"
     console.log(searchType)
-    return
+    return searchType
 })
