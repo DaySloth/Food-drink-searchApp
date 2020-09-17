@@ -23,13 +23,13 @@
     //value assigned to search type by checkbox
        
       
-      if (searchType===Name){
+      if (searchType==="Name"){
        var drinksAPI =
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="+drinkName;
       }
-      if (searchType===Ingredient){
+      if (searchType==="Ingredient"){
          drinksAPI =
-        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+        "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="+drinkName;
       }
     
 
@@ -47,13 +47,13 @@
         DrinkSearch();
     })
 
-    $("byName").on("click",function(event){
+    $("#byName").on("click",function(event){
         event.preventDefault();
         searchType="Name"
         console.log(searchType)
         return
     })
-    $("byIngredient").on("click",function(event){
+    $("#byIngredient").on("click",function(event){
         event.preventDefault();
         searchType="Ingredient"
         console.log(searchType)
