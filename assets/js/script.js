@@ -15,6 +15,14 @@ function searchIngredients(recipeid) {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        let modalTitle = response.title;
+        let ingredientsListUl = $('<ul>');
+        
+        for(var i = 0; i < response.extendedIngredients.length; i++){
+            ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
+        };
+        $('#modalTitle').text(modalTitle);
+        $('#modalBody').html(ingredientsListUl);
     });
 };
 
@@ -50,7 +58,7 @@ function searchForRecipe() {
             recipeCardBody.append(title);
             recipeCardBody.append(readyMin);
             recipeCardBody.append(servings);
-            recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).text("Show Ingredients"));
+            recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
             recipeCardBody.append($('<br/>'))
             recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").text("Add to Recipe Book"));
             recipeCard.append(recipeCardBody);
