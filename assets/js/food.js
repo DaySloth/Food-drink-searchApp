@@ -1,6 +1,4 @@
 let recipeSearch;
-
-
 function searchIngredients(recipeid) {
     var settings = {
         "async": true,
@@ -62,3 +60,4 @@ $("#recipeDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
 });
+
