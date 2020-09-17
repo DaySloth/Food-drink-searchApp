@@ -1,7 +1,6 @@
 let recipeSearch;
 let allergies = [];
 
-
 function searchIngredients(recipeid) {
     var settings = {
         "async": true,
@@ -78,7 +77,6 @@ function searchForRecipe() {
                 $("#recipeCardDiv").append(recipeCard);
             };
         };
-        
     });
 };
 
