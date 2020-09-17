@@ -88,7 +88,7 @@ $("#submitBtn").on("click", function (event) {
     searchForRecipe();
 });
 
-$("#recipeCardDiv").on("click", ".ingredientsBtn", function (event) {
+$("#recipeDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
     searchIngredients($(this).attr("data-recipeid"));
 });
