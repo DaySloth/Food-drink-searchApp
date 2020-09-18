@@ -35,7 +35,6 @@ function searchForRecipe() {
     allergies = [];
     let allergiesID = ["#dairy","#egg","#gluten","#peanut","#sesame","#seafood","#shellfish","#soy","#sulfite","#treeNut","#wheat"];
     let randomSearch = Math.floor(Math.random() * 50);
-    console.log(randomSearch);
     for(var i = 0; i < allergiesID.length; i++){
         if($(allergiesID[i]).prop('checked')){
             allergies.push($(allergiesID[i]).attr("value"));
@@ -57,7 +56,7 @@ function searchForRecipe() {
         console.log(response);
         $("#recipeCardDiv").empty();
         if(response.results.length === 0){
-            alert("no results");
+            $("#recipeCardDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes found. Please adjust search paramaters and try again"));
         } else {
             for (var i = 0; i < 10; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
@@ -77,7 +76,7 @@ function searchForRecipe() {
                 recipeCardBody.append(readyMin);
                 recipeCardBody.append(servings);
                 recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
-                recipeCardBody.append($('<br/>'))
+                recipeCardBody.append($('<br/>'));
                 recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Add to Recipe Book"));
                 summaryDiv.append(recipeCardBody);
                 recipeCard.append(summaryDiv);
