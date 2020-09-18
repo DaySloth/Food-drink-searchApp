@@ -21,6 +21,7 @@ function searchIngredients(recipeid) {
         for(var i = 0; i < response.extendedIngredients.length; i++){
             ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
         };
+        $('.modal-content').attr("style", "background-color: white; color: black");
         $('#modalTitle').text(modalTitle);
         $('#modalBody').html(ingredientsListUl);
     });
@@ -63,7 +64,7 @@ function searchForRecipe() {
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
                 let foodImg = $('<img>').attr("class", "card-img-top").attr("src", imageURL).attr("style", "width: 18em");
                 let imgDiv = $('<div>').attr("class", "col-md-4");
-                let summaryDiv = $('<div>').attr("class", "col-md-8");
+                let summaryDiv = $('<div>').attr("class", "col-lg-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
                 let title = $('<h5>').attr("class", "card-title").text(response.results[i].title);
                 let readyMin = $('<p>').attr("class", "card-text").text("Ready In: " + response.results[i].readyInMinutes + " min");
