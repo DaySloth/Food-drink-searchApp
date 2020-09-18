@@ -62,7 +62,7 @@ function searchForRecipe() {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
-                let foodImg = $('<img>').attr("class", "card-img-top").attr("src", imageURL).attr("style", "width: 18em");
+                let foodImg = $('<img>').attr("class", "card-img").attr("src", imageURL).attr("style", "max-height: 20em; max-width: 20em");
                 let imgDiv = $('<div>').attr("class", "col-md-4");
                 let summaryDiv = $('<div>').attr("class", "col-lg-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
