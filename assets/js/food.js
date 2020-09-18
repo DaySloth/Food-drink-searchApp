@@ -34,7 +34,8 @@ function searchForRecipe() {
     console.log(recipeSearch)
     allergies = [];
     let allergiesID = ["#dairy","#egg","#gluten","#peanut","#sesame","#seafood","#shellfish","#soy","#sulfite","#treeNut","#wheat"];
-
+    let randomSearch = Math.floor(Math.random() * 50);
+    console.log(randomSearch);
     for(var i = 0; i < allergiesID.length; i++){
         if($(allergiesID[i]).prop('checked')){
             allergies.push($(allergiesID[i]).attr("value"));
@@ -44,7 +45,7 @@ function searchForRecipe() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=" + recipeSearch + "&intolerances=" + allergies.toString(),
+        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?offset=" + randomSearch +"&query=" + recipeSearch + "&intolerances=" + allergies.toString(),
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -58,7 +59,7 @@ function searchForRecipe() {
         if(response.results.length === 0){
             alert("no results");
         } else {
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 10; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
