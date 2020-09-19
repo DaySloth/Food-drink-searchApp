@@ -10,13 +10,16 @@ function IngredientDisplay(drinkID) {
         let ingredients = [];
         let instructions = response.drinks[0].strInstructions;
 
-        
+        for(var i = 0; i < 15; i++){
+            let strIngredient = "strIngredient"+ (i+1);
+            let strMeasure = "strMeasure"+ (i+1);
+        }
         console.log(response.drinks[0][str1]);
         
         console.log(ingredients);
         console.log(instructions);
         $('#modalTitle').text("");
-        $('#modalBody').html();
+        $('#modalBody').html("");
     });
 
 }
