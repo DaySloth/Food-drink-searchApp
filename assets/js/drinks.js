@@ -1,8 +1,8 @@
 searchType = ""
-resultsDispay= $("#results")
+resultsDispay = $("#results")
 //function that gets ingredient details button
-function getIngredients(){
-    let instructions= 
+function getIngredients() {
+    let instructions = 
 
 }
 
@@ -24,19 +24,31 @@ function DrinkSearch() {
         method: "GET",
     }).then(function (response) {
         console.log(response);
-        for (var i=0; i< response.drinks.length;i++){
-        let picture=$("<img>");
-        let drinkPic=response.drinks[i].strDrinkThumb;
-        picture.attr("src",drinkPic);
-        let drinkName=response.drinks[i].strDrink;
-        let explore=$("<button>Details</button>");
-        let drinkID=response.drinks[i].idDrink
-        let newDiv=$("<div>");
-        newDiv.append(picture);
-        newDiv.append(drinkName);
-        newDiv.append(explore);
-        resultsDispay.append(newDiv);
+        let DrinkCardHoriz = $('<div>').attr("class", "card mb-3");
+        let DrinkCard = $('<div>').attr("class", "row no-gutters");
+        let DrinkCardBody = $('<div>').attr("class", "card-body");
+        let Image = $('<img>').attr("class", "card-img-top")
+        let imgDiv = $('<div>').attr("class", "col-md-4");
+        let bodyDiv = $('<div>').attr("class", "col-md-8");
+        if (response.drinks.length === 0); {
+            noResults = $("<h5>No Results Found. Try a new search!</h5>");
+            resultsDispay.append(noResults);
+           
         }
+        if (response.drinks.length>0){ 
+            for (var i = 0; i < response.drinks.length; i++) {
+                let drinkPic = response.drinks[i].strDrinkThumb;
+                picture.attr("src", drinkPic).attr("style", "width: 18cm");
+                let drinkName = response.drinks[i].strDrink;
+                let explore = $("<button>Details</button>");
+                let drinkID = response.drinks[i].idDrink
+                let newDiv = $("<div>");
+                newDiv.append(picture);
+                newDiv.append(drinkName);
+                newDiv.append(explore);
+                resultsDispay.append(newDiv);
+        }
+    }
     })
 }
 
@@ -48,13 +60,16 @@ $("#submitBtn").on("click", function (event) {
 
 $("#byName").on("click", function (event) {
     event.preventDefault();
-    searchType = "Name"
-    console.log(searchType)
+    if ($("#byName".prop('checked')){
+        searchType = "Name"
+    }
     return searchType
 })
 $("#byIngredient").on("click", function (event) {
     event.preventDefault();
-    searchType = "Ingredient"
-    console.log(searchType)
+    if ($("#byIngredient".prop('checked')){
+        searchType = "Ingredient"
+    }
+
     return searchType
 })
