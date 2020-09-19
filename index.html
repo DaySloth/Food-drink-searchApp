@@ -6,23 +6,27 @@
     <title>Food and Drink Recipe Search</title>
     <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css"
-        integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
+        integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous"/>
 
     <!-- foundation-prototype.min.css: Compressed CSS with prototyping classes -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css"
-        integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
+        integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous"/>
 
     <!-- foundation-rtl.min.css: Compressed CSS with right-to-left reading direction -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css"
-        integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
+        integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous"/>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <!-- Font-awesome link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <!-- Local styling -->
     <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 
 <body>
+    <!-- Nav bar from bootstrap utilizing foundation.css -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,23 +34,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="./food.html">Food Recipes</a>
-                <a class="nav-item nav-link" href="./drinks.html">Drinks/Cocktail Recipes</a>
-                <a class="nav-item nav-link" href="./recipes.html">Recipe Book</a>
+                <a class="nav-item nav-link active" href="./food.html">Food Recipes</a>
+                <a class="nav-item nav-link active" href="./drinks.html">Drinks/Cocktail Recipes</a>
+                <a class="nav-item nav-link active" href="./recipes.html">Recipe Book</a>
             </div>
         </div>
-      </div>
     </nav>
-
+    <!-- Split image links for page -->
     <a href="./food.html" class="left-img float-left">
         <button class="buttons float-center">Food Recipes</button>
     </a>
     <a href="./drinks.html" class="right-img float-right">
         <button class="buttons float-center">Drinks/Cocktail Recipes</button>
     </a>
-
-    <footer>
-        <h6>Go to blah blah</h6>
+    <!-- Footer using foudation -->
+    <footer class="clearfix">
+        <p class="float-left">For more info on allergies visit <a href="https://www.mayoclinic.org/diseases-conditions/food-allergy/symptoms-causes/syc-20355095#:~:text=Food%20allergy%20is%20an%20immune,problems%2C%20hives%20or%20swollen%20airways.">Mayo Clinic</a></p>
+        <p class="float-right">Coded with love <i class="fas fa-heart"></i></p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
