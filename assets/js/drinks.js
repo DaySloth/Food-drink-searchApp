@@ -1,10 +1,10 @@
 searchType = ""
-resultsDispay= $("#results")
+resultsDispay = $("#results")
 //function that gets ingredient details button
-function getIngredients(){
-    let instructions= 
+// function getIngredients() {
+//     let instructions = 
 
-}
+// }
 
 function DrinkSearch() {
 
@@ -19,24 +19,41 @@ function DrinkSearch() {
     }
 
 
-    $.ajax({
-        url: drinksAPI,
-        method: "GET",
+    $.ajax({ 
+        url: drinksAPI, 
+        method: "GET"
     }).then(function (response) {
         console.log(response);
-        for (var i=0; i< response.drinks.length;i++){
-        let picture=$("<img>");
-        let drinkPic=response.drinks[i].strDrinkThumb;
-        picture.attr("src",drinkPic);
-        let drinkName=response.drinks[i].strDrink;
-        let explore=$("<button>Details</button>");
-        let drinkID=response.drinks[i].idDrink
-        let newDiv=$("<div>");
-        newDiv.append(picture);
-        newDiv.append(drinkName);
-        newDiv.append(explore);
-        resultsDispay.append(newDiv);
-        }
+        let cardHoriz = $('<div>').attr("class", "card mb-3");
+        let card = $('<div>').attr("class", "row no-gutters");
+        let cardBody = $('<div>').attr("class", "card-body");
+        let Image = $('<img>').attr("class", "card-img-top")
+        let imgDiv = $('<div>').attr("class", "col-md-4");
+        let bodyDiv = $('<div>').attr("class", "col-md-8");
+        // if (response.drinks.length === 0); {
+        //     noResults = $("<h5>No Results Found. Try a new search!</h5>");
+        //     resultsDispay.append(noResults);
+           
+        // }
+        // elseif (response.drinks.length>0); { 
+            for (var i = 0; i < response.drinks.length; i++) {
+                let drinkPic = response.drinks[i].strDrinkThumb;
+                Image.attr("src", drinkPic).attr("style", "width: 18cm");
+                let drinkName = response.drinks[i].strDrink;
+                let explore = $("<button>Details</button>");
+                let drinkID = response.drinks[i].idDrink;
+                imgDiv.append(Image);
+                card.append(imgDiv);
+                bodyDiv.append(drinkName);
+                bodyDiv.append(explore);
+                cardBody.append(bodyDiv);
+                card.append(cardBody);
+                cardHoriz.append(card);
+                resultsDispay.append(cardHoriz);
+                //thinking of using this for checking ingredients to be able to flag allergens
+                return drinkID
+            // }
+    }
     })
 }
 
@@ -49,12 +66,12 @@ $("#submitBtn").on("click", function (event) {
 $("#byName").on("click", function (event) {
     event.preventDefault();
     searchType = "Name"
-    console.log(searchType)
+    
     return searchType
 })
 $("#byIngredient").on("click", function (event) {
     event.preventDefault();
     searchType = "Ingredient"
-    console.log(searchType)
+
     return searchType
 })
