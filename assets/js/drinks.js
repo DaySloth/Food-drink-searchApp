@@ -1,10 +1,10 @@
 searchType = ""
 resultsDispay = $("#results")
 //function that gets ingredient details button
-function getIngredients() {
-    let instructions = 
+// function getIngredients() {
+//     let instructions = 
 
-}
+// }
 
 function DrinkSearch() {
 
@@ -19,14 +19,11 @@ function DrinkSearch() {
     }
 
 
-    $.ajax({
-        url: drinksAPI,
-        method: "GET",
-    }).then(function (response) {
+    $.ajax({ url: drinksAPI, method: "GET",}).then(function (response) {
         console.log(response);
-        let DrinkCardHoriz = $('<div>').attr("class", "card mb-3");
-        let DrinkCard = $('<div>').attr("class", "row no-gutters");
-        let DrinkCardBody = $('<div>').attr("class", "card-body");
+        let cardHoriz = $('<div>').attr("class", "card mb-3");
+        let card = $('<div>').attr("class", "row no-gutters");
+        let cardBody = $('<div>').attr("class", "card-body");
         let Image = $('<img>').attr("class", "card-img-top")
         let imgDiv = $('<div>').attr("class", "col-md-4");
         let bodyDiv = $('<div>').attr("class", "col-md-8");
@@ -41,12 +38,17 @@ function DrinkSearch() {
                 picture.attr("src", drinkPic).attr("style", "width: 18cm");
                 let drinkName = response.drinks[i].strDrink;
                 let explore = $("<button>Details</button>");
-                let drinkID = response.drinks[i].idDrink
+                let drinkID = response.drinks[i].idDrink;
                 let newDiv = $("<div>");
-                newDiv.append(picture);
-                newDiv.append(drinkName);
-                newDiv.append(explore);
-                resultsDispay.append(newDiv);
+                Image.append(picture);
+                imgDiv.append(Image);
+                card.append(imgDiv);
+                cardBody.append(drinkName);
+                cardBody.append(explore);
+                card.append(cardBody);
+                resultsDispay.append(card);
+                //thinking of using this for checking ingredients to be able to flag allergens
+                return drinkID
         }
     }
     })
@@ -60,16 +62,13 @@ $("#submitBtn").on("click", function (event) {
 
 $("#byName").on("click", function (event) {
     event.preventDefault();
-    if ($("#byName".prop('checked')){
-        searchType = "Name"
-    }
+    searchType = "Name"
+    
     return searchType
 })
 $("#byIngredient").on("click", function (event) {
     event.preventDefault();
-    if ($("#byIngredient".prop('checked')){
-        searchType = "Ingredient"
-    }
+    searchType = "Ingredient"
 
     return searchType
 })
