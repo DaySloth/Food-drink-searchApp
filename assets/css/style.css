@@ -31,11 +31,21 @@
   border-radius: 50%;
 } */
 
+/* Landing-Page Styling */
 html,
 body {
     height: 100%;
     margin: 0;
-  }
+}
+
+footer{
+  background-color: #d3d3d3;
+}
+
+footer p{
+  margin: 10px;
+  padding: 10px;
+}
 
 .left-img {
   background: url("../images/recipeleftimg.jpg");
