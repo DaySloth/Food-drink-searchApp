@@ -6,9 +6,9 @@ function init(){
             for (var i = 0; i < savedFoodRecipes.length; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
-                let imgDiv = $('<div>').attr("class", "col-md-4");
-                let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc).attr("style", "width: 18em");
-                let summaryDiv = $('<div>').attr("class", "col-md-8");
+                let imgDiv = $('<div>').attr("class", "col-sm-4");
+                let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc);
+                let summaryDiv = $('<div>').attr("class", "col-sm-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
                 let title = $('<h5>').attr("class", "card-title").text(savedFoodRecipes[i].title);
                 let readyMin = $('<p>').attr("class", "card-text").text(savedFoodRecipes[i].readyMin);

@@ -1,4 +1,4 @@
-.split {
+/* .split {
   height: 100%;
   width: 50%;
   position: fixed;
@@ -29,10 +29,54 @@
 .centered img {
   width: 150px;
   border-radius: 50%;
+} */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+  }
+
+.left-img {
+  background: url('https://wallpapershome.com/images/wallpapers/food-1080x1920-cooking-grill-vegetables-peppers-mushrooms-tomatoes-403.jpg');
+  width: 50%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.left-img:hover {
+  background: url('https://wallpapershome.com/images/wallpapers/food-1080x1920-cooking-grill-vegetables-peppers-mushrooms-tomatoes-403.jpg');
+  opacity: 1.0;
+  text-decoration: none;
+}
+
+.right-img {
+  background: url('https://i.pinimg.com/originals/21/20/c5/2120c513935d107e8262f2818ea652d3.jpg');
+  width: 50%;
+  height: 100%;
+  opacity: 0.5;
+}
+.right-img:hover {
+  background: url('https://i.pinimg.com/originals/21/20/c5/2120c513935d107e8262f2818ea652d3.jpg');
+  opacity: 1.0;
+  text-decoration: none;
+}
+
+.buttons {
+  background-color: #a5a5a5b9;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 50%;
+  text-decoration: none;
 }
 
 /* Recipe Book Styling */
-.split-container {
+#recipePage{
+  background: url('../images/recipebook.jpg')top center no-repeat;
+}
+.split-container{
   width: 100%;
 }
 .recipe-div {
