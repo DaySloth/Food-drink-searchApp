@@ -21,6 +21,7 @@ function searchIngredients(recipeid) {
         for(var i = 0; i < response.extendedIngredients.length; i++){
             ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
         };
+        $('.modal-content').attr("style", "background-color: white; color: black");
         $('#modalTitle').text(modalTitle);
         $('#modalBody').html(ingredientsListUl);
     });
@@ -33,7 +34,7 @@ function searchForRecipe() {
     console.log(recipeSearch)
     allergies = [];
     let allergiesID = ["#dairy","#egg","#gluten","#peanut","#sesame","#seafood","#shellfish","#soy","#sulfite","#treeNut","#wheat"];
-
+    let randomSearch = Math.floor(Math.random() * 50);
     for(var i = 0; i < allergiesID.length; i++){
         if($(allergiesID[i]).prop('checked')){
             allergies.push($(allergiesID[i]).attr("value"));
@@ -43,7 +44,7 @@ function searchForRecipe() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=" + recipeSearch + "&intolerances=" + allergies.toString(),
+        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?offset=" + randomSearch +"&query=" + recipeSearch + "&intolerances=" + allergies.toString(),
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -55,15 +56,15 @@ function searchForRecipe() {
         console.log(response);
         $("#recipeCardDiv").empty();
         if(response.results.length === 0){
-            alert("no results");
+            $("#recipeCardDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes found. Please adjust search paramaters and try again"));
         } else {
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 10; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
-                let foodImg = $('<img>').attr("class", "card-img-top").attr("src", imageURL).attr("style", "width: 18em");
+                let foodImg = $('<img>').attr("class", "card-img").attr("src", imageURL).attr("style", "max-height: 20em; max-width: 20em");
                 let imgDiv = $('<div>').attr("class", "col-md-4");
-                let summaryDiv = $('<div>').attr("class", "col-md-8");
+                let summaryDiv = $('<div>').attr("class", "col-lg-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
                 let title = $('<h5>').attr("class", "card-title").text(response.results[i].title);
                 let readyMin = $('<p>').attr("class", "card-text").text("Ready In: " + response.results[i].readyInMinutes + " min");
@@ -75,7 +76,7 @@ function searchForRecipe() {
                 recipeCardBody.append(readyMin);
                 recipeCardBody.append(servings);
                 recipeCardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", response.results[i].id).attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Show Ingredients"));
-                recipeCardBody.append($('<br/>'))
+                recipeCardBody.append($('<br/>'));
                 recipeCardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").attr("data-toggle", "modal").attr("data-target", "#recipeModal").text("Add to Recipe Book"));
                 summaryDiv.append(recipeCardBody);
                 recipeCard.append(summaryDiv);
