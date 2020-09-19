@@ -1,32 +1,22 @@
 searchType = ""
-resultsDispay = $("#results")
+resultsDisplay = $("#results")
 //function that gets ingredient details button
-function IngredientDisplay() {
-    let modalTitle = $(this).parent().strDrink;
-    let ingredientsList = $('<ul>');
-    let ing1= $(this).parent().strIngredient1;
-    let newIng=$("<li>");
-    newIng.append(ing1);
-    ingredientsList.append(newIng);
-    // let ing2= $(this).parent().strIngredient2
-    // let ing3= $(this).parent().strIngredient3
-    // let ing4= $(this).parent().strIngredient4
-    // let ing5= $(this).parent().strIngredient5
-    // let ing6= $(this).parent().strIngredient6
-    // let ing7= $(this).parent().strIngredient7
-    // let ing8= $(this).parent().strIngredient8
-    // let ing9= $(this).parent().strIngredient9
-    let instructions= $(this).parent().strInstructions
+function IngredientDisplay(drinkID) {
+    var drinkAPI= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+drinkID
 
-    console.log(newIng, ingredientsList, instructions)
-    
-
-    $('.modal-content').attr("style", "background-color: white; color: black");
-    $('#modalTitle').text(modalTitle);
-    $('#modalBody').html(ingredientsList);
-    $('#modalBody').append(instructions);
-
+    $.ajax({
+        url: drinkAPI,
+        method: "GET"
+    }).then(function (response) {
+      
+        // for (var i=1; i<16; i++){
+        //     I= JSON.stringify(i)
+        //     for (var I in response.drinks[0]) {
+           
+        }
+    })
 }
+    
 
 function DrinkSearch() {
 
@@ -58,7 +48,7 @@ function DrinkSearch() {
             let drinkPic = response.drinks[i].strDrinkThumb;
             Image.attr("src", drinkPic)
             let drinkName = response.drinks[i].strDrink;
-            let explore = $("<button class=btn btn-info id=ingredients>See Ingredients</button>");
+            let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredient");
             imgDiv.append(Image);
             card.append(imgDiv);
             cardTitle.append(drinkName);
@@ -67,7 +57,7 @@ function DrinkSearch() {
             bodyDiv.append(cardBody);
             card.append(bodyDiv);
             cardHoriz.append(card);
-            resultsDispay.append(cardHoriz);
+            resultsDisplay.append(cardHoriz);
         }
     })
 }
@@ -90,7 +80,7 @@ $("#byIngredient").on("click", function (event) {
 
     return searchType
 })
-resultsDispay.on("click", "#ingredients", function(event) {
+resultsDisplay.on("click", ".ingredient", function(event) {
     event.preventDefault();
-    IngredientDisplay($(this));
+    IngredientDisplay(($(this)[0].attributes[0].value));
 });
