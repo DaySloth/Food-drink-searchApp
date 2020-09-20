@@ -2,7 +2,7 @@ searchType = ""
 resultsDisplay = $("#results")
 //function that gets ingredient details button
 function IngredientDisplay(drinkID) {
-    var drinkAPI= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+drinkID
+
     $.ajax({
         url: "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+ drinkID,
         method: "GET"
@@ -14,8 +14,14 @@ function IngredientDisplay(drinkID) {
         for(var i = 0; i < 15; i++){
             let strIngredient = "strIngredient"+ (i+1);
             let strMeasure = "strMeasure"+ (i+1);
+ 
+            if (response.drinks[0][strIngredient] != null){
+                ingredients.push(response.drinks[0][strIngredient])
+                if (response.drinks[0][strMeasure] != null){
+                    ingredients.push(response.drinks[0][strMeasure])
+                }
+            }
         }
-        console.log(response.drinks[0][str1]);
         
         console.log(ingredients);
         console.log(instructions);
@@ -23,17 +29,6 @@ function IngredientDisplay(drinkID) {
         $('#modalBody').html("");
     });
 
-    $.ajax({
-        url: drinkAPI,
-        method: "GET"
-    }).then(function (response) {
-      
-        // for (var i=1; i<16; i++){
-        //     I= JSON.stringify(i)
-        //     for (var I in response.drinks[0]) {
-           
-        }
-    })
 }
     
 
@@ -68,7 +63,7 @@ function DrinkSearch() {
             Image.attr("src", drinkPic)
             let drinkName = response.drinks[i].strDrink;
 
-            let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredient");
+            let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredients");
 
             imgDiv.append(Image);
             card.append(imgDiv);
@@ -102,7 +97,7 @@ $("#byIngredient").on("click", function (event) {
     return searchType
 })
 
-resultsDispay.on("click", ".ingredients", function(event) {
+resultsDisplay.on("click", ".ingredients", function(event) {
     event.preventDefault();
     IngredientDisplay($(this)[0].attributes[0].value);
 
