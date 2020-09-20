@@ -22,11 +22,25 @@ function IngredientDisplay(drinkID) {
                 }
             }
         }
+        let spacer=$("<hr>")
+        let instructionsList= $("<ul>")
+        for (var i=0; i<ingredients.length; i++){
+            let ingInstruct=$("<li>")
+            ingInstruct.text(ingredients[i] + " ");
+            instructionsList.append(ingInstruct)
+            instructionsList.append(spacer)
+        }
+
         
+
         console.log(ingredients);
         console.log(instructions);
-        $('#modalTitle').text("");
-        $('#modalBody').html("");
+
+        $('.modal-content').attr("style", "background-color: white; color: black");
+        $('#modalTitle').text(response.drinks[0].strDrink + " Recipe");
+        $('#modalBody').html(instructionsList);
+        $('#modalBody').append(instructions);
+
     });
 
 }
@@ -63,7 +77,7 @@ function DrinkSearch() {
             Image.attr("src", drinkPic)
             let drinkName = response.drinks[i].strDrink;
 
-            let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredients");
+            let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredients").attr("data-toggle", "modal").attr("data-target", "#ingredientModal");;
 
             imgDiv.append(Image);
             card.append(imgDiv);
