@@ -101,6 +101,31 @@ footer p{
 .modal-body h6 {
   font-weight: bold;
 }
+
+/* Drink Page Styling */
+.submitBtn {
+  background-color: #032c05;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.byName {
+  background-color: #032c05;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
 /* want to add pseudoclass that changes if button was clicked to display the slected option? still figuring that out  */
 /* #byName:on{
   
