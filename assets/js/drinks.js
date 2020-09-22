@@ -1,5 +1,6 @@
 searchType = ""
 resultsDisplay = $("#results")
+let spacer=$("<hr>")
 //function that gets ingredient details button
 function IngredientDisplay(drinkID) {
 
@@ -22,7 +23,6 @@ function IngredientDisplay(drinkID) {
                 }
             }
         }
-        let spacer=$("<hr>")
         let instructionsList= $("<ul>")
         for (var i=0; i<ingredients.length; i++){
             let ingInstruct=$("<li>")
@@ -78,12 +78,13 @@ function DrinkSearch() {
             let drinkName = response.drinks[i].strDrink;
 
             let explore = $("<button>See Ingredients</button>").attr("data-drinkID",response.drinks[i].idDrink).attr("class","btn btn-info ingredients").attr("data-toggle", "modal").attr("data-target", "#ingredientModal");;
-
+           
             imgDiv.append(Image);
             card.append(imgDiv);
             cardTitle.append(drinkName);
             cardBody.append(cardTitle)
             cardBody.append(explore);
+            cardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "addToRecipeBook").attr("data-toggle", "modal").attr("data-target", "#ingredientModal").text("Add to Recipe Book"));
             bodyDiv.append(cardBody);
             card.append(bodyDiv);
             cardHoriz.append(card);
@@ -115,4 +116,40 @@ resultsDisplay.on("click", ".ingredients", function(event) {
     event.preventDefault();
     IngredientDisplay($(this)[0].attributes[0].value);
 
+});
+resultsDisplay.on("click", "#addToRecipeBook", function(event) {
+    event.preventDefault();
+    let drinkRecipeObj;
+    drinkRecipeObj = {
+        title: $(this).parent().children()[0].innerHTML,
+        imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
+    };
+    let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    if(savedRecipes){
+        let condition = false;
+        for(var i = 0; i < savedRecipes.length; i++){
+            if(savedRecipes[i].title == drinkRecipeObj.title){
+                condition = true;
+            };
+        };
+        if(condition){
+            console.log("already in storage not adding");
+            $('.modal-content').attr("style", "background-color: #FFA2A2; color: #B81919");
+            $('#modalTitle').text("Error");
+            $('#modalBody').html("Already added to your "+ "<a href=./recipes.html>Recipe Book</a>");
+        } else {
+            console.log("adding");
+            $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
+            $('#modalTitle').text("Success");
+            $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
+            savedRecipes.push(drinkRecipeObj);
+        };
+    }else{
+        savedRecipes = [];
+        $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
+            $('#modalTitle').text("Success");
+            $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
+        savedRecipes.push(drinkRecipeObj);
+    };
+    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
 });
