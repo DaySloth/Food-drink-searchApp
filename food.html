@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Recipe Search</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Noto+Sans+KR:wght@500&family=Quicksand&family=Source+Serif+Pro&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body id="foodSearchPage">
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="./index.html">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -38,14 +44,15 @@
             </div>
         </div>
     </div>
-
-    <div class="container">
+    <div class="container foodPage">
         <form>
             <div class="form-group">
-                <label for="recipeSearch">Search for recipe:</label>
-                <input type="text" class="form-control" id="recipeSearch" placeholder="Steak, burger, pizza">
+                <div class="center">
+                    <label for="recipeSearch">Search for recipe:</label>
+                    <input type="text" class="form-control" id="recipeSearch" placeholder="Steak, burger, pizza">
+                </div>
             </div>
-            <div>
+            <div id="allergies">
                 <h5>Allergies:</h5>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="dairy" value="diary">
@@ -88,7 +95,7 @@
                     <label class="form-check-label" for="wheat">Wheat</label>
                 </div>
             </div>
-            
+
             <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Search</button>
         </form>
 
@@ -106,5 +113,7 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/js/food.js"></script>
+
 </body>
+
 </html>

@@ -1,6 +1,8 @@
+// Globally assigned variables to call
 let recipeSearch;
 let allergies = [];
 
+//searches the recipe id provided for the ingredients
 function searchIngredients(recipeid) {
     var settings = {
         "async": true,
@@ -15,26 +17,29 @@ function searchIngredients(recipeid) {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        //assigns the module to display the title and the list of ingredients
         let modalTitle = response.title;
         let ingredientsListUl = $('<ul>');
-        
+        //loop to append the ingredients listed in the object
         for(var i = 0; i < response.extendedIngredients.length; i++){
             ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
         };
+        //Module content assigning
         $('.modal-content').attr("style", "background-color: white; color: black");
         $('#modalTitle').text(modalTitle);
         $('#modalBody').html(ingredientsListUl);
     });
 };
 
-
-
-
+// Searching for recipe
 function searchForRecipe() {
     console.log(recipeSearch)
+    //sets an array to look at the allergies
     allergies = [];
     let allergiesID = ["#dairy","#egg","#gluten","#peanut","#sesame","#seafood","#shellfish","#soy","#sulfite","#treeNut","#wheat"];
+    //randomizes the searches returned
     let randomSearch = Math.floor(Math.random() * 50);
+    //runs through all of the checkboxes to see if they are checked, adds them to the allergies array
     for(var i = 0; i < allergiesID.length; i++){
         if($(allergiesID[i]).prop('checked')){
             allergies.push($(allergiesID[i]).attr("value"));
@@ -54,11 +59,14 @@ function searchForRecipe() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        //empties the recipe div
         $("#recipeCardDiv").empty();
+        //checks to see if anything was returned from the search, displays an error in the div if there was an error
         if(response.results.length === 0){
             $("#recipeCardDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes found. Please adjust search paramaters and try again"));
         } else {
-            for (var i = 0; i < 10; i++) {
+            //runs through the recipes returned in the object and inputs to the page
+            for (var i = 0; i < response.results.length; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
@@ -87,20 +95,26 @@ function searchForRecipe() {
     });
 };
 
+//click listener for the submit button
 $("#submitBtn").on("click", function(event) {
     event.preventDefault();
     recipeSearch = $("#recipeSearch").val();
+    //calls the serach recipe function to search for the recipe
     searchForRecipe();
 });
 
+//click listener for the display ingredients button
 $("#recipeCardDiv").on("click", ".ingredientsBtn", function(event) {
     event.preventDefault();
+    //puts in the recipe id to search the ingredients
     searchIngredients($(this).attr("data-recipeid"));
 });
 
+//click listener for adding to recipe book
 $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
     event.preventDefault();
     let recipeObj;
+    //sets object to add to recipe book
     recipeObj = {
         title: $(this).parent().children()[0].innerHTML,
         readyMin: $(this).parent().children()[1].innerHTML,
@@ -109,18 +123,22 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
         imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
     };
     let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    //checks if there is anything in saved recipes
     if(savedRecipes){
         let condition = false;
+        //checks if the recipe already exists in the recipe book
         for(var i = 0; i < savedRecipes.length; i++){
             if(savedRecipes[i].title == recipeObj.title){
                 condition = true;
             };
         };
+        //displays an error if the recipe already exists in the book
         if(condition){
             console.log("already in storage not adding");
             $('.modal-content').attr("style", "background-color: #FFA2A2; color: #B81919");
             $('#modalTitle').text("Error");
             $('#modalBody').html("Already added to your "+ "<a href=./recipes.html>Recipe Book</a>");
+        //displays success if it can be added
         } else {
             console.log("adding");
             $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
@@ -128,6 +146,7 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
             $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
             savedRecipes.push(recipeObj);
         };
+    //if nothing was in the recipe book then it will display success upon adding the first recipe
     }else{
         savedRecipes = [];
         $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
