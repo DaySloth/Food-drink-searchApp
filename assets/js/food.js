@@ -122,7 +122,7 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
         recipeId: $(this).parent().children()[3].dataset.recipeid,
         imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
     };
-    let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    let savedRecipes = $.parseJSON(localStorage.getItem("savedRecipes"));
     //checks if there is anything in saved recipes
     if(savedRecipes){
         let condition = false;
