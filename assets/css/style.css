@@ -84,6 +84,12 @@ footer p{
 }
 
 /* Drink Page Styling */
+#drinkSearchPage{
+  background: url('../images/drink-page-background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
 .submitBtn {
   background-color: #032c05;
   border: none;
@@ -140,7 +146,7 @@ footer p{
 
 #allergies{
   margin: 20px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 #recipeCardDiv{
