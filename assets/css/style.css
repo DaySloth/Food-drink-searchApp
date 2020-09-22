@@ -177,6 +177,9 @@ footer p{
   display: inline-block;
 }
 
+font-family: 'Heebo', sans-serif;
+font-family: 'Noto Sans KR', sans-serif;
+}
 /* want to add pseudoclass that changes if button was clicked to display the slected option? still figuring that out  */
 /* #byName:on{
   
