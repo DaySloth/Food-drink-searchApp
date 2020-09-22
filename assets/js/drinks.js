@@ -52,8 +52,12 @@ function DrinkSearch() {
         var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
     }
-    if (searchType === "Ingredient") {
+    else if (searchType === "Ingredient") {
         drinksAPI =
+            "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
+    }
+    else{
+        var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
     }
     resultsDisplay.empty();
