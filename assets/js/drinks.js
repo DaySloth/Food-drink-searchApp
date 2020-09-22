@@ -8,7 +8,7 @@ function IngredientDisplay(drinkID) {
         url: "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkID,
         method: "GET"
     }).then(function (response) {
-        console.log(response.drinks[0])
+  
         let ingredients = [];
         let instructions = response.drinks[0].strInstructions;
 
@@ -32,10 +32,6 @@ function IngredientDisplay(drinkID) {
         }
 
 
-
-        console.log(ingredients);
-        console.log(instructions);
-
         $('.modal-content').attr("style", "background-color: white; color: black");
         $('#modalTitle').text(response.drinks[0].strDrink + " Recipe");
         $('#modalBody').html(instructionsList);
@@ -45,7 +41,6 @@ function IngredientDisplay(drinkID) {
 
 }
 
-
 function DrinkSearch() {
 
 
@@ -53,8 +48,11 @@ function DrinkSearch() {
         var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
     }
-    if (searchType === "Ingredient") {
-        drinksAPI =
+    else if (searchType === "Surprise") {
+            var drinksAPI="https://www.thecocktaildb.com/api/json/v1/1/random.php";
+    }
+    else{
+        var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
     }
     resultsDisplay.empty();
@@ -62,7 +60,6 @@ function DrinkSearch() {
         url: drinksAPI,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
 
         for (var i = 0; i < response.drinks.length; i++) {
             let cardHoriz = $('<div>').attr("class", "card mb-3");
@@ -104,9 +101,9 @@ $("#byName").on("click", function (event) {
 
     return searchType
 })
-$("#byIngredient").on("click", function (event) {
+$("#supriseMe").on("click", function (event) {
     event.preventDefault();
-    searchType = "Ingredient"
+    searchType = "Surprise"
 
     return searchType
 })
@@ -119,11 +116,11 @@ resultsDisplay.on("click", ".ingredients", function (event) {
 resultsDisplay.on("click", "#addToRecipeBook", function (event) {
     event.preventDefault();
     let drinkRecipeObj;
-    
     drinkRecipeObj = {
         title: $(this).parent().children()[0].innerHTML,
         imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
-        drinkID:$(this).parent().children[0].dataset.drinkID
+        drinkID:$(this).parent()[0].children[1].dataset.drinkid
+
     };
     console.log(drinkRecipeObj)
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
@@ -135,12 +132,10 @@ resultsDisplay.on("click", "#addToRecipeBook", function (event) {
             };
         };
         if (condition) {
-            console.log("already in storage not adding");
             $('.modal-content').attr("style", "background-color: #FFA2A2; color: #B81919");
             $('#modalTitle').text("Error");
             $('#modalBody').html("Already added to your " + "<a href=./recipes.html>Recipe Book</a>");
         } else {
-            console.log("adding");
             $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
             $('#modalTitle').text("Success");
             $('#modalBody').html("Added to " + "<a href=./recipes.html>Recipe Book</a>");

@@ -1,5 +1,6 @@
 function init(){
     $("#foodRecipeDiv").empty();
+    $("#drinkRecipeDiv").empty();
     let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedFoodRecipes){
         if(savedFoodRecipes[0] !== undefined){
@@ -36,7 +37,6 @@ function init(){
     };
     
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
-    console.log(savedDrinkRecipes)
     if(savedDrinkRecipes){
         if(savedDrinkRecipes[0] !== undefined){
             for (var i = 0; i < savedDrinkRecipes.length; i++) {
@@ -76,7 +76,7 @@ function searchDrinkRecipe(drinkID){
         url: "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+ drinkID,
         method: "GET"
     }).then(function(response){
-        console.log(response.drinks[0])
+     
         let ingredients = [];
         let instructions = response.drinks[0].strInstructions;
 
@@ -96,18 +96,17 @@ function searchDrinkRecipe(drinkID){
             let ingInstruct=$("<li>")
             ingInstruct.text(ingredients[i] + " ");
             instructionsList.append(ingInstruct)
-            instructionsList.append(spacer)
         }
 
         
 
-        console.log(ingredients);
-        console.log(instructions);
-
+        $('.drinkBody').empty();
         $('.modal-content').attr("style", "background-color: white; color: black");
-        $('#modalTitle').text(response.drinks[0].strDrink + " Recipe");
-        $('#modalBody').html(instructionsList);
-        $('#modalBody').append(instructions);
+        $('.drinkTitle').text(response.drinks[0].strDrink + " Recipe");
+        $('.drinkBody').append($('<h6>').text("Ingredients:"));
+        $('.drinkBody').html(instructionsList);
+        $('.drinkBody').append($('<h6>').text("Prep & Instructions:"));
+        $('.drinkBody').append(instructions);
 
     });
 
@@ -128,7 +127,7 @@ function searchIngredients(recipeid) {
     }
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
+   
         let modalTitle = response.title;
         let ingredientsListUl = $('<ul>');
         let instructionsList = $('<ol>');
@@ -159,7 +158,7 @@ $("#foodRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
     let compareID = $(this).parent().children()[3].dataset.recipeid;
     let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-    console.log(savedFoodRecipes);
+  
     for(var i = 0; i < savedFoodRecipes.length; i++){
         if(savedFoodRecipes[i].recipeId == compareID){
             savedFoodRecipes.splice(i, 1);
@@ -176,10 +175,9 @@ $("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
 
 $("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
-    let compareID = $(this).parent().children()[3].dataset.drinkID;
-    console.log(compareID)
+    let compareID = $(this).parent()[0].children[1].dataset.drinkid;
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
-    console.log(savedDrinkRecipes);
+
     for(var i = 0; i < savedDrinkRecipes.length; i++){
         if(savedDrinkRecipes[i].drinkID == compareID){
             savedDrinkRecipes.splice(i, 1);
