@@ -34,8 +34,9 @@ function init(){
     }else{
         $("#foodRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
     };
-
-    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    
+    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
+    console.log(savedDrinkRecipes)
     if(savedDrinkRecipes){
         if(savedDrinkRecipes[0] !== undefined){
             for (var i = 0; i < savedDrinkRecipes.length; i++) {
@@ -50,7 +51,7 @@ function init(){
                 imgDiv.append(drinkImg);
                 drinkCard.append(imgDiv);
                 cardBody.append(title);
-                cardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-recipeid", savedFoodRecipes[i].drinkID).attr("data-toggle", "modal").attr("data-target", "#ingredientModal").text("Show Ingredients/Instructions"));
+                cardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-drinkID", savedDrinkRecipes[i].drinkID).attr("data-toggle", "modal").attr("data-target", "#ingredientModal").text("Show Ingredients/Instructions"));
                 cardBody.append($('<br/>'))
                 cardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
                 bodyDiv.append(cardBody);
@@ -170,19 +171,20 @@ $("#foodRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
 
 $("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
     event.preventDefault();
-    searchDrinkRecipe($(this).attr("data-"));
+    searchDrinkRecipe($(this).attr("data-drinkID"));
 });
 
 $("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
     let compareID = $(this).parent().children()[3].dataset.drinkID;
-    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    console.log(compareID)
+    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
     console.log(savedDrinkRecipes);
     for(var i = 0; i < savedDrinkRecipes.length; i++){
         if(savedDrinkRecipes[i].drinkID == compareID){
             savedDrinkRecipes.splice(i, 1);
         }
     };
-    localStorage.setItem("savedRecipes", JSON.stringify(savedDrinkRecipes));
+    localStorage.setItem("savedDrinkRecipes", JSON.stringify(savedDrinkRecipes));
     init();
 });
