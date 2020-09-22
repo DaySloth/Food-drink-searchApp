@@ -95,20 +95,26 @@ function searchForRecipe() {
     });
 };
 
+//click listener for the submit button
 $("#submitBtn").on("click", function(event) {
     event.preventDefault();
     recipeSearch = $("#recipeSearch").val();
+    //calls the serach recipe function to search for the recipe
     searchForRecipe();
 });
 
+//click listener for the display ingredients button
 $("#recipeCardDiv").on("click", ".ingredientsBtn", function(event) {
     event.preventDefault();
+    //puts in the recipe id to search the ingredients
     searchIngredients($(this).attr("data-recipeid"));
 });
 
+//click listener for adding to recipe book
 $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
     event.preventDefault();
     let recipeObj;
+    //sets object to add to recipe book
     recipeObj = {
         title: $(this).parent().children()[0].innerHTML,
         readyMin: $(this).parent().children()[1].innerHTML,
@@ -117,18 +123,22 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
         imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
     };
     let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    //checks if there is anything in saved recipes
     if(savedRecipes){
         let condition = false;
+        //checks if the recipe already exists in the recipe book
         for(var i = 0; i < savedRecipes.length; i++){
             if(savedRecipes[i].title == recipeObj.title){
                 condition = true;
             };
         };
+        //displays an error if the recipe already exists in the book
         if(condition){
             console.log("already in storage not adding");
             $('.modal-content').attr("style", "background-color: #FFA2A2; color: #B81919");
             $('#modalTitle').text("Error");
             $('#modalBody').html("Already added to your "+ "<a href=./recipes.html>Recipe Book</a>");
+        //displays success if it can be added
         } else {
             console.log("adding");
             $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
@@ -136,6 +146,7 @@ $("#recipeCardDiv").on("click", "#addToRecipeBook", function(event) {
             $('#modalBody').html("Added to "+ "<a href=./recipes.html>Recipe Book</a>");
             savedRecipes.push(recipeObj);
         };
+    //if nothing was in the recipe book then it will display success upon adding the first recipe
     }else{
         savedRecipes = [];
         $('.modal-content').attr("style", "background-color: #B0EA85; color: #3F9500");
