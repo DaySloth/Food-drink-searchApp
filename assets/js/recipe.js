@@ -6,9 +6,9 @@ function init(){
             for (var i = 0; i < savedFoodRecipes.length; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
-                let imgDiv = $('<div>').attr("class", "col-sm-4");
+                let imgDiv = $('<div>').attr("class", "col-md-4");
                 let foodImg = $('<img>').attr("class", "card-img").attr("src", savedFoodRecipes[i].imgSrc);
-                let summaryDiv = $('<div>').attr("class", "col-sm-8");
+                let summaryDiv = $('<div>').attr("class", "col-md-8");
                 let recipeCardBody = $('<div>').attr("class", "card-body");
                 let title = $('<h5>').attr("class", "card-title").text(savedFoodRecipes[i].title);
                 let readyMin = $('<p>').attr("class", "card-text").text(savedFoodRecipes[i].readyMin);
@@ -34,7 +34,85 @@ function init(){
     }else{
         $("#foodRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
     };
+    
+    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
+    console.log(savedDrinkRecipes)
+    if(savedDrinkRecipes){
+        if(savedDrinkRecipes[0] !== undefined){
+            for (var i = 0; i < savedDrinkRecipes.length; i++) {
+                let drinkCardHoriz = $('<div>').attr("class", "card mb-3");
+                let drinkCard = $('<div>').attr("class", "row no-gutters");
+                let imgDiv = $('<div>').attr("class", "col-sm-4");
+                let drinkImg = $('<img>').attr("class", "card-img").attr("src", savedDrinkRecipes[i].imgSrc);
+                let bodyDiv = $('<div>').attr("class", "col-sm-8");
+                let cardBody = $('<div>').attr("class", "card-body");
+                let title = $('<h5>').attr("class", "card-title").text(savedDrinkRecipes[i].title);
+
+                imgDiv.append(drinkImg);
+                drinkCard.append(imgDiv);
+                cardBody.append(title);
+                cardBody.append($("<button>").attr("id", "showIngredientsBtn").attr("class", "btn btn-primary ingredientsBtn").attr("data-drinkID", savedDrinkRecipes[i].drinkID).attr("data-toggle", "modal").attr("data-target", "#ingredientModal").text("Show Ingredients/Instructions"));
+                cardBody.append($('<br/>'))
+                cardBody.append($('<button>').attr("class", "btn btn-primary").attr("id", "deleteFromRecipeBook").text("Delete Recipe"));
+                bodyDiv.append(cardBody);
+                drinkCard.append(bodyDiv);
+                drinkCardHoriz.append(drinkCard);
+                $("#drinkRecipeDiv").append(drinkCardHoriz);
+            };
+        }else{
+            $("#drinkRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
+        };
+        
+    }else{
+        $("#drinkRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
+    };
+
+
 };
+
+function searchDrinkRecipe(drinkID){
+
+    $.ajax({
+        url: "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+ drinkID,
+        method: "GET"
+    }).then(function(response){
+        console.log(response.drinks[0])
+        let ingredients = [];
+        let instructions = response.drinks[0].strInstructions;
+
+        for(var i = 0; i < 15; i++){
+            let strIngredient = "strIngredient"+ (i+1);
+            let strMeasure = "strMeasure"+ (i+1);
+ 
+            if (response.drinks[0][strIngredient] != null){
+                ingredients.push(response.drinks[0][strIngredient])
+                if (response.drinks[0][strMeasure] != null){
+                    ingredients.push(response.drinks[0][strMeasure])
+                }
+            }
+        }
+        let instructionsList= $("<ul>")
+        for (var i=0; i<ingredients.length; i++){
+            let ingInstruct=$("<li>")
+            ingInstruct.text(ingredients[i] + " ");
+            instructionsList.append(ingInstruct)
+            instructionsList.append(spacer)
+        }
+
+        
+
+        console.log(ingredients);
+        console.log(instructions);
+
+        $('.modal-content').attr("style", "background-color: white; color: black");
+        $('#modalTitle').text(response.drinks[0].strDrink + " Recipe");
+        $('#modalBody').html(instructionsList);
+        $('#modalBody').append(instructions);
+
+    });
+
+}
+    
 
 
 function searchIngredients(recipeid) {
@@ -88,5 +166,25 @@ $("#foodRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
         }
     };
     localStorage.setItem("savedRecipes", JSON.stringify(savedFoodRecipes));
+    init();
+});
+
+$("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
+    event.preventDefault();
+    searchDrinkRecipe($(this).attr("data-drinkID"));
+});
+
+$("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
+    event.preventDefault();
+    let compareID = $(this).parent().children()[3].dataset.drinkID;
+    console.log(compareID)
+    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
+    console.log(savedDrinkRecipes);
+    for(var i = 0; i < savedDrinkRecipes.length; i++){
+        if(savedDrinkRecipes[i].drinkID == compareID){
+            savedDrinkRecipes.splice(i, 1);
+        }
+    };
+    localStorage.setItem("savedDrinkRecipes", JSON.stringify(savedDrinkRecipes));
     init();
 });
