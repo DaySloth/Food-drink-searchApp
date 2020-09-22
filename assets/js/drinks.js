@@ -43,7 +43,6 @@ function IngredientDisplay(drinkID) {
 
 function DrinkSearch() {
 
-
     if (searchType === "Name") {
         var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
