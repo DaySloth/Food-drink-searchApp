@@ -101,11 +101,3 @@ footer p{
 .modal-body h6 {
   font-weight: bold;
 }
-/* want to add pseudoclass that changes if button was clicked to display the slected option? still figuring that out  */
-/* #byName:on{
-  
-}
-
-#byIngredient{
-
-} */

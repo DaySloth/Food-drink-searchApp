@@ -96,7 +96,6 @@ function searchDrinkRecipe(drinkID){
             let ingInstruct=$("<li>")
             ingInstruct.text(ingredients[i] + " ");
             instructionsList.append(ingInstruct)
-            instructionsList.append(spacer)
         }
 
         
@@ -176,7 +175,7 @@ $("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
 
 $("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
-    let compareID = $(this).parent().children()[3].dataset.drinkID;
+    let compareID = $(this).parent()[0].children[1].dataset.drinkid;
     console.log(compareID)
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
     console.log(savedDrinkRecipes);

@@ -45,7 +45,6 @@ function IngredientDisplay(drinkID) {
 
 }
 
-
 function DrinkSearch() {
 
 
@@ -119,11 +118,12 @@ resultsDisplay.on("click", ".ingredients", function (event) {
 resultsDisplay.on("click", "#addToRecipeBook", function (event) {
     event.preventDefault();
     let drinkRecipeObj;
-    
+    console.log($(this).parent()[0].children[1].dataset.drinkid)
     drinkRecipeObj = {
         title: $(this).parent().children()[0].innerHTML,
         imgSrc: $(this).parent().parent().parent().children()[0].children[0].currentSrc,
-        drinkID:$(this).parent().children[0].dataset.drinkID
+        drinkID:$(this).parent()[0].children[1].dataset.drinkid
+
     };
     console.log(drinkRecipeObj)
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
