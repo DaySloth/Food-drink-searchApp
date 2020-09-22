@@ -135,6 +135,16 @@ footer p{
   color: white;
 }
 
+#foodSearchPage .btn-primary{
+  background-color: red;
+  border: 2px solid red;
+}
+
+#foodSearchPage .btn-primary:hover{
+  background-color: #b10202;
+  border: 2px solid #b10202;
+}
+
 .container{
   background-color: #adadad;
   margin: 5% auto;
