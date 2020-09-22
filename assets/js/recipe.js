@@ -103,7 +103,9 @@ function searchDrinkRecipe(drinkID){
         $('.drinkBody').empty();
         $('.modal-content').attr("style", "background-color: white; color: black");
         $('.drinkTitle').text(response.drinks[0].strDrink + " Recipe");
+        $('.drinkBody').append($('<h6>').text("Ingredients:"));
         $('.drinkBody').html(instructionsList);
+        $('.drinkBody').append($('<h6>').text("Prep & Instructions:"));
         $('.drinkBody').append(instructions);
 
     });
