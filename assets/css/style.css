@@ -89,28 +89,18 @@ footer p{
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  color: rgb(3, 61, 49);
 }
 
-.submitBtn {
-  background-color: #032c05;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+#drinkSearchPage .btn-primary{
+  background-color: rgb(15, 68, 46);
+  border: 2px solid rgb(82, 6, 59);
+  font-family: 'Heebo', sans-serif;
 }
 
-.byName {
-  background-color: #032c05;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+#drinkSearchPage .btn-primary:hover{
+  background-color: #394e10;
+  border: 2px solid #326e20;
 }
 
 /* Food Recipe Search Page Styling */
