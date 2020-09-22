@@ -1,6 +1,8 @@
+// Globally assigned variables to call
 let recipeSearch;
 let allergies = [];
 
+//searches the recipe id provided for the ingredients
 function searchIngredients(recipeid) {
     var settings = {
         "async": true,
@@ -15,26 +17,29 @@ function searchIngredients(recipeid) {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        //assigns the module to display the title and the list of ingredients
         let modalTitle = response.title;
         let ingredientsListUl = $('<ul>');
-        
+        //loop to append the ingredients listed in the object
         for(var i = 0; i < response.extendedIngredients.length; i++){
             ingredientsListUl.append($('<li>').text(response.extendedIngredients[i].original));
         };
+        //Module content assigning
         $('.modal-content').attr("style", "background-color: white; color: black");
         $('#modalTitle').text(modalTitle);
         $('#modalBody').html(ingredientsListUl);
     });
 };
 
-
-
-
+// Searching for recipe
 function searchForRecipe() {
     console.log(recipeSearch)
+    //sets an array to look at the allergies
     allergies = [];
     let allergiesID = ["#dairy","#egg","#gluten","#peanut","#sesame","#seafood","#shellfish","#soy","#sulfite","#treeNut","#wheat"];
+    //randomizes the searches returned
     let randomSearch = Math.floor(Math.random() * 50);
+    //runs through all of the checkboxes to see if they are checked, adds them to the allergies array
     for(var i = 0; i < allergiesID.length; i++){
         if($(allergiesID[i]).prop('checked')){
             allergies.push($(allergiesID[i]).attr("value"));
@@ -54,11 +59,14 @@ function searchForRecipe() {
 
     $.ajax(settings).done(function (response) {
         console.log(response);
+        //empties the recipe div
         $("#recipeCardDiv").empty();
+        //checks to see if anything was returned from the search, displays an error in the div if there was an error
         if(response.results.length === 0){
             $("#recipeCardDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes found. Please adjust search paramaters and try again"));
         } else {
-            for (var i = 0; i < 10; i++) {
+            //runs through the recipes returned in the object and inputs to the page
+            for (var i = 0; i < response.results.length; i++) {
                 let recipeCardHoriz = $('<div>').attr("class", "card mb-3");
                 let recipeCard = $('<div>').attr("class", "row no-gutters");
                 let imageURL = "https://spoonacular.com/recipeImages/" + response.results[i].image;
