@@ -65,6 +65,17 @@ footer p{
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  font-family: 'Heebo', sans-serif;
+}
+
+header{
+  margin-bottom: -25px;
+}
+
+.container{
+  margin-top: 20px;
+  background-color: #cccccc;
+  padding: 10px;
 }
 
 .split-container{
