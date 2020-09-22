@@ -1,5 +1,6 @@
 function init(){
     $("#foodRecipeDiv").empty();
+    $("#drinkRecipeDiv").empty();
     let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
     if(savedFoodRecipes){
         if(savedFoodRecipes[0] !== undefined){
@@ -102,11 +103,11 @@ function searchDrinkRecipe(drinkID){
 
         console.log(ingredients);
         console.log(instructions);
-
+        $('.drinkBody').empty();
         $('.modal-content').attr("style", "background-color: white; color: black");
-        $('#modalTitle').text(response.drinks[0].strDrink + " Recipe");
-        $('#modalBody').html(instructionsList);
-        $('#modalBody').append(instructions);
+        $('.drinkTitle').text(response.drinks[0].strDrink + " Recipe");
+        $('.drinkBody').html(instructionsList);
+        $('.drinkBody').append(instructions);
 
     });
 
@@ -176,7 +177,6 @@ $("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
 $("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
     let compareID = $(this).parent()[0].children[1].dataset.drinkid;
-    console.log(compareID)
     let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
     console.log(savedDrinkRecipes);
     for(var i = 0; i < savedDrinkRecipes.length; i++){
