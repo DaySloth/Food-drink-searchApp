@@ -1,35 +1,9 @@
-/* .split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+/* Font Families used in page
 
-.left {
-  left: 0;
-  background-color: #111;
-}
+font-family: 'Heebo', sans-serif;
+font-family: 'Noto Sans KR', sans-serif;
 
-.right {
-  right: 0;
-  background-color: red;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.centered img {
-  width: 150px;
-  border-radius: 50%;
-} */
+*/
 
 /* Landing-Page Styling */
 html,
@@ -142,6 +116,7 @@ footer p{
 #foodSearchPage .btn-primary{
   background-color: red;
   border: 2px solid red;
+  font-family: 'Heebo', sans-serif;
 }
 
 #foodSearchPage .btn-primary:hover{
@@ -162,6 +137,7 @@ footer p{
 
 #allergies{
   margin: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #recipeCardDiv{
@@ -176,15 +152,3 @@ footer p{
   margin: 5px;
   display: inline-block;
 }
-
-font-family: 'Heebo', sans-serif;
-font-family: 'Noto Sans KR', sans-serif;
-}
-/* want to add pseudoclass that changes if button was clicked to display the slected option? still figuring that out  */
-/* #byName:on{
-  
-}
-
-#byIngredient{
-
-} */
