@@ -52,9 +52,8 @@ function DrinkSearch() {
         var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
     }
-    else if (searchType === "Ingredient") {
-        drinksAPI =
-            "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
+    else if (searchType === "Surprise") {
+            var drinksAPI="https://www.thecocktaildb.com/api/json/v1/1/random.php";
     }
     else{
         var drinksAPI =
@@ -107,9 +106,9 @@ $("#byName").on("click", function (event) {
 
     return searchType
 })
-$("#byIngredient").on("click", function (event) {
+$("#supriseMe").on("click", function (event) {
     event.preventDefault();
-    searchType = "Ingredient"
+    searchType = "Surprise"
 
     return searchType
 })
