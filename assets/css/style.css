@@ -84,8 +84,12 @@ footer p{
 
 /* Recipe Book Styling */
 #recipePage{
-  background: url('../images/recipebook.jpg')top center no-repeat;
+  background: url('../images/recipebook.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
+
 .split-container{
   width: 100%;
 }
@@ -145,7 +149,7 @@ footer p{
   border: 2px solid #b10202;
 }
 
-.container{
+.foodPage{
   background-color: #adadad;
   margin: 5% auto;
   padding: 20px;
