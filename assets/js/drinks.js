@@ -69,7 +69,7 @@ function DrinkSearch() {
             let card = $('<div>').attr("class", "row no-gutters");
             let cardTitle = $("<h3 class= card-title>")
             let cardBody = $('<div>').attr("class", "card-body");
-            let Image = $('<img>').attr("class", "card-img")
+            let Image = $('<img>').attr("class", "card-img").attr("style", "max-width: 18em");
             let imgDiv = $('<div>').attr("class", "col-md-4");
             let bodyDiv = $('<div>').attr("class", "col-md-8");
             let drinkPic = response.drinks[i].strDrinkThumb;
