@@ -125,6 +125,44 @@ footer p{
   font-size: 16px;
 }
 
+/* Food Recipe Search Page Styling */
+
+#foodSearchPage {
+  background-image: url('../images/recipeleftimg.jpg');
+  opacity: 1.5;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+  color: white;
+}
+
+.container{
+  background-color: #adadad;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card{
+  background-color: #e9e9e9;
+}
+
+#allergies{
+  margin: 20px;
+}
+
+#recipeCardDiv{
+  color: black;
+}
+
+#submitBtn{
+  margin-bottom: 20px;
+}
+
+#showIngredientsBtn, #addToRecipeBook{
+  margin: 5px;
+  display: inline-block;
+}
 
 /* want to add pseudoclass that changes if button was clicked to display the slected option? still figuring that out  */
 /* #byName:on{

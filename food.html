@@ -7,9 +7,10 @@
     <title>Food Recipe Search</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 
-<body>
+<body id="foodSearchPage">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="./index.html">Home</a>
@@ -24,9 +25,6 @@
             </div>
         </div>
     </nav>
-
-    <div id="allergies"><div id="hcontainer">
-        <div id="content">
 
     <div class="modal fade" id="recipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -45,7 +43,7 @@
             </div>
         </div>
     </div>
-    <p style="color: white"></p>
+
     <div class="container">
         <form>
             <div class="form-group">
@@ -115,37 +113,6 @@
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/js/food.js"></script>
-
-    <style>
-        body {
-            background-image: url('.//assets/images/recipeleftimg.jpg');
-            opacity: 1.5;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100%;
-        }
-
-        #allergies {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            top: 60;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            text-align: center;
-            border: white;
-            text-emphasis-color: white;
-        }
-
-        #content {
-            display: inline-block;
-            border: lightGray 1px solid;
-            background-color:brown);
-            text-align: left;
-        }
-    </style>
 
 </body>
 
