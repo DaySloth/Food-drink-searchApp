@@ -43,7 +43,6 @@ function IngredientDisplay(drinkID) {
 
 function DrinkSearch() {
 
-
     if (searchType === "Name") {
         var drinksAPI =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkName;
@@ -60,7 +59,6 @@ function DrinkSearch() {
         url: drinksAPI,
         method: "GET"
     }).then(function (response) {
-
         for (var i = 0; i < response.drinks.length; i++) {
             let cardHoriz = $('<div>').attr("class", "card mb-3");
             let card = $('<div>').attr("class", "row no-gutters");

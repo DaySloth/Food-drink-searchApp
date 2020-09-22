@@ -1,7 +1,7 @@
 function init(){
     $("#foodRecipeDiv").empty();
     $("#drinkRecipeDiv").empty();
-    let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
+    let savedFoodRecipes = $.parseJSON(localStorage.getItem("savedRecipes"));
     if(savedFoodRecipes){
         if(savedFoodRecipes[0] !== undefined){
             for (var i = 0; i < savedFoodRecipes.length; i++) {
@@ -36,7 +36,7 @@ function init(){
         $("#foodRecipeDiv").append($('<div>').attr("class", "alert alert-danger").text("No recipes saved"));
     };
     
-    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
+    let savedDrinkRecipes = $.parseJSON(localStorage.getItem("savedDrinkRecipes"));
     if(savedDrinkRecipes){
         if(savedDrinkRecipes[0] !== undefined){
             for (var i = 0; i < savedDrinkRecipes.length; i++) {
@@ -76,14 +76,13 @@ function searchDrinkRecipe(drinkID){
         url: "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+ drinkID,
         method: "GET"
     }).then(function(response){
-     
         let ingredients = [];
         let instructions = response.drinks[0].strInstructions;
 
         for(var i = 0; i < 15; i++){
             let strIngredient = "strIngredient"+ (i+1);
             let strMeasure = "strMeasure"+ (i+1);
- 
+
             if (response.drinks[0][strIngredient] != null){
                 ingredients.push(response.drinks[0][strIngredient])
                 if (response.drinks[0][strMeasure] != null){
@@ -127,7 +126,7 @@ function searchIngredients(recipeid) {
     }
 
     $.ajax(settings).done(function (response) {
-   
+
         let modalTitle = response.title;
         let ingredientsListUl = $('<ul>');
         let instructionsList = $('<ol>');
@@ -157,8 +156,8 @@ $("#foodRecipeDiv").on("click", ".ingredientsBtn", function (event) {
 $("#foodRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
     let compareID = $(this).parent().children()[3].dataset.recipeid;
-    let savedFoodRecipes = JSON.parse(localStorage.getItem("savedRecipes"));
-  
+    let savedFoodRecipes = $.parseJSON(localStorage.getItem("savedRecipes"));
+
     for(var i = 0; i < savedFoodRecipes.length; i++){
         if(savedFoodRecipes[i].recipeId == compareID){
             savedFoodRecipes.splice(i, 1);
@@ -176,7 +175,7 @@ $("#drinkRecipeDiv").on("click", ".ingredientsBtn", function (event) {
 $("#drinkRecipeDiv").on("click", "#deleteFromRecipeBook", function (event) {
     event.preventDefault();
     let compareID = $(this).parent()[0].children[1].dataset.drinkid;
-    let savedDrinkRecipes = JSON.parse(localStorage.getItem("savedDrinkRecipes"));
+    let savedDrinkRecipes = $.parseJSON(localStorage.getItem("savedDrinkRecipes"));
 
     for(var i = 0; i < savedDrinkRecipes.length; i++){
         if(savedDrinkRecipes[i].drinkID == compareID){
