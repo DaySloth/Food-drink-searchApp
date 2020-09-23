@@ -17,7 +17,7 @@ The technology used included APIs, Foundation and Mootools. In the beginning, Te
 AS a user with food allergies, I WANT to search for recipes that consider my allergies SO THAT I can build a worry-free recipe book
 
 * GIVEN an option to search for food or drink recipes using inputs,
-*WHEN I select which type of recipe I want to search for, then I am presented with a seperate search page
+* WHEN I select which type of recipe I want to search for, then I am presented with a seperate search page
 * WHEN I select a recipe search, then I am presented with checkboxes for different allergies
 * WHEN the results are returned, then I can view details of the recipe such as prep time and servings, and a button that expands a modal
 * WHEN I click on the modal, then I can view all ingredients, instructions, and am presented with the option to save the recipe to my locally stored recipe book
